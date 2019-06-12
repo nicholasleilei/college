@@ -99,9 +99,8 @@
 			 type:"post",
 			 data:$("#form_login").serialize(),
 			 success:function(d){
-				 alert(d);
 				if(d=="ok")
-				 location="ok.jsp";
+				 location="backmain.jsp";
 			 }
 		 });
 	  });
