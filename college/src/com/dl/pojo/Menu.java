@@ -39,5 +39,12 @@ public Menu() {
 	super();
 	// TODO Auto-generated constructor stub
 }
+public Menu(int id, String title, String type, Menu menu) {
+	super();
+	this.id = id;
+	this.title = title;
+	this.type = type;
+	this.menu = menu;
+}
   
 }

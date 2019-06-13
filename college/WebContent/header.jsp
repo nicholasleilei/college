@@ -41,13 +41,13 @@
                         <a href="UserServlet?flag=findAll"><i class="glyphicon glyphicon-user"></i>用户管理</a>
                     </li>
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-sitemap"></i> 菜单管理</a>
+                        <a href="MenuServlet?flag=findAll"><i class="fa fa-sitemap"></i> 菜单管理</a>
                     </li>
 					<li>
-                        <a href="chart.html"><i class="fa fa-edit"></i> 子菜单管理</a>
+                        <a href="SubServlet?flag=findAll"><i class="fa fa-edit"></i> 子菜单管理</a>
                     </li>
                     <li>
-                        <a href="tab-panel.html"><i class="glyphicon glyphicon-film"></i> 轮播图管理</a>
+                        <a href="ImageServlet?flag=findAll"><i class="glyphicon glyphicon-film"></i> 轮播图管理</a>
                     </li>
                     
                 </ul>

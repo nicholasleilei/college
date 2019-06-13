@@ -10,4 +10,5 @@ public interface BaseDAO <T>{
   public List<T> findBySomething(String s);
   public List<T> findBySql(String sql);
   public T findById(int id);
+  
 }

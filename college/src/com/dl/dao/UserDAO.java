@@ -14,58 +14,26 @@ import com.dl.util.DBUtil;
 import com.dl.util.Pager;
 
 public class UserDAO implements BaseDAO<User>{
-
+    
 	@Override
 	public void insert(User t) {
 		// TODO Auto-generated method stub
-		String sql="insert into user values(null,?,?,'')";
-		try {
-			Connection conn = DBUtil.getConn();
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, t.getUsername());
-			stmt.setString(2, t.getPassword());
-			stmt.executeUpdate();
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String sql="insert into user values(null,'"+t.getUsername()+"','"+t.getPassword()+"','')";
+		DBUtil.execute(sql);
 	}
 
 	@Override
 	public void update(User t) {
 		// TODO Auto-generated method stub
-		String sql="update user set username=? ,password=? where id=?";
-		try {
-			Connection conn = DBUtil.getConn();
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, t.getUsername());
-			stmt.setString(2, t.getPassword());
-			stmt.setInt(3, t.getId());
-			stmt.executeUpdate();
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String sql="update user set username='"+t.getUsername()+"' ,password='"+t.getPassword()+"' where id="+t.getId();
+		DBUtil.execute(sql);
 	}
 
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		String sql="delete from user where id="+id;
-		try {
-			Connection conn = DBUtil.getConn();
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.executeUpdate();
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		DBUtil.execute(sql);
 	}
 
 	@Override
@@ -86,7 +54,8 @@ public class UserDAO implements BaseDAO<User>{
 	public List<User> findBySql(String sql) {
 		List<User> users = new ArrayList<>();
 		try {
-			PreparedStatement ps = DBUtil.getConn().prepareStatement(sql);
+			Connection conn = DBUtil.getConn();
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 		     while(rs.next()) {
 		    	 User u = new User();
@@ -98,6 +67,7 @@ public class UserDAO implements BaseDAO<User>{
 		     }
 		     rs.close();
 		     ps.close();
+		     conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -156,7 +126,6 @@ public class UserDAO implements BaseDAO<User>{
 		String pager=Pager.getPagerStr(url, size, rows, cpage, 1);
 		request.setAttribute("pager", pager);
 		String sql="select * from user where username like '%"+name+"%' limit "+(cpage-1)*size+","+size;
-		System.out.println(sql);
 		   return findBySql(sql);
 	}
 
