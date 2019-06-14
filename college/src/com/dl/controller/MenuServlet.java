@@ -19,19 +19,24 @@ import net.sf.json.JSONArray;
 public class MenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MenuService ms = new MenuService();
-//	private MenuDAO mdao = new MenuDAO();
-//	private SubMenuDAO subdao = new SubMenuDAO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String flag = request.getParameter("flag");
+		System.out.println(flag);
 		switch (flag) {
 		case "findAll":
 			findAll(request,response);
 			break;
+		case "checkMenu":
+			checkMenu(request,response);
+			break;
 		case "delete":
 			delete(request,response);
+			break;
+		case "deleteSome":
+			deleteSome(request,response);
 			break;
 		case "insert":
 			insert(request,response);
@@ -48,23 +53,34 @@ public class MenuServlet extends HttpServlet {
 		case "findParentMenu":
 			findParentMenu(request,response);
 			break;
-		case "checkDel":
-			checkDel(request,response);
-			break;
+		
 
 		default:
 			break;
 		}
 	}
-	private void checkDel(HttpServletRequest request, HttpServletResponse response) {
+	private void deleteSome(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String mess=request.getParameter("mess");
+	System.out.println(mess);
+		if((mess!=null) && (!mess.equals(""))) {
+		String[] strs= mess.split(",");
+		  ms.deleteByIds(mess);
+		  response.getWriter().print(strs.length);
+		}else {
+			response.getWriter().print(0);
+		}
+		
+	}
+	private void checkMenu(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-//		String id = request.getParameter("id");
-//			try {
-//				response.getWriter().print(subdao.findByMid(Integer.parseInt(id)));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+		String id = request.getParameter("id");
+			try {
+				List<Menu> menus =ms.findByMid(Integer.parseInt(id));
+				response.getWriter().print(menus.size());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	private void findParentMenu(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
@@ -82,7 +98,7 @@ public class MenuServlet extends HttpServlet {
 		List<Menu> menus = ms.findBySearchPage(request, title);//.findByName(title);
 		request.setAttribute("menus", menus);
 		try {
-			request.getRequestDispatcher("menu_show.jsp").forward(request, response);
+			request.getRequestDispatcher("menu_list.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,19 +159,10 @@ public class MenuServlet extends HttpServlet {
 		findAll(request, response);
 	}
 	private void delete(HttpServletRequest request, HttpServletResponse response) {
-		int  id = Integer.parseInt(request.getParameter("id"));
-//		
-//		List<Menu> menus = mdao.findByMid(id);
-//		for(Menu m:menus) {
-//			//将二级菜单下 所有对应的三级菜单删除
-//			subdao.deleteByMid(m.getId());
-//		}
-//		
-		ms.delete(id);//删菜单表 id完全匹配
-	//	mdao.deleteByMid(id);//删菜单表 如果该菜单是一级菜单并存在二级子菜单 按mid删除
-		//并且需要查询该id下所有的二级菜单
-	
-	//	subdao.deleteByMid(id);//删除子菜单表，与一级菜单直接关联的三级菜单	
+		System.out.println(1222);
+		int  id = Integer.parseInt(request.getParameter("did"));
+		System.out.println("id:"+id);
+		ms.delete(id);
 		findAll(request, response);
 	}
 	private void findAll(HttpServletRequest request, HttpServletResponse response) {

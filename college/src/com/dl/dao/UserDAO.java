@@ -93,6 +93,7 @@ public class UserDAO implements BaseDAO<User>{
 	public void deleteByIds(String strs) {
 		// TODO Auto-generated method stub
 		String sql="delete from user where id in("+strs+")";
+		System.out.println(sql);
 		try {
 			Connection conn = DBUtil.getConn();
 			PreparedStatement stmt = conn.prepareStatement(sql);

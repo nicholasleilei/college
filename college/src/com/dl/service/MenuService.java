@@ -18,13 +18,13 @@ private MenuDAO mdao = new MenuDAO();
 	@Override
 	public void update(Menu t) {
 		// TODO Auto-generated method stub
-		
+		mdao.update(t);
 	}
 
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		
+		mdao.delete(id);
 	}
 
 	@Override
@@ -52,12 +52,22 @@ private MenuDAO mdao = new MenuDAO();
 
 	public List<Menu> findBySearchPage(HttpServletRequest request, String title) {
 		// TODO Auto-generated method stub
-		return null;
+		return mdao.findBySearchPage(request, title);
 	}
 
 	public List<Menu> findParentMenu() {
 		// TODO Auto-generated method stub
 		return mdao.findParentMenu();
+	}
+
+	public List<Menu> findByMid(int parseInt) {
+		// TODO Auto-generated method stub
+		return mdao.findByMid(parseInt);
+	}
+
+	public void deleteByIds(String strs) {
+		// TODO Auto-generated method stub
+		mdao.deleteByIds(strs);
 	}
 
 

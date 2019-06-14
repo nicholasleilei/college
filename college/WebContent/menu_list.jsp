@@ -16,12 +16,12 @@
 			<div id="page-inner" style="height:92%;padding:30px 50px;">
                <a href="menu_insert.jsp" class="btn btn-success" style="float:left;height:30px;width:30px;padding:3px;margin-right:20px;"><span class="glyphicon glyphicon-plus "></span></a>
                <a id="del_batch" class="btn btn-danger" style="height:30px;width:30px;padding:3px;"><span class="glyphicon glyphicon-remove"></span></a>
-            <form action="MenuServlet?flag=findBySomething" method="post"  style="float:right;width:30%;">
+            <form action="MenuServlet?flag=findByTitle" method="post"  style="float:right;width:30%;">
            <div class="row" >
   <div class="col-lg-12" >
     <div class="input-group" style="margin-bottom:10px;">
    
-      <input type="text" class="form-control" placeholder="按用户名查询..." name="username">
+      <input type="text" class="form-control" placeholder="按标题查询..." name="title">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit">查询</button>
       </span>
@@ -49,9 +49,7 @@
                  <td>${m.menu.id }</td>
                  <td>${m.menu.title }</td>
                  <td><a href="MenuServlet?flag=yupdate&id=${m.id }" class="btn btn-warning" style="height:30px;width:30px;padding:3px;"><span class="glyphicon glyphicon-folder-open"></span></a>
-                  <a href="" class="btn btn-danger" style="margin-left:30px;height:30px;width:30px;padding:4px;"><span class="glyphicon glyphicon-remove"></span></a>
-                  <!-- MenuServlet?flag=delete&id=${m.id } -->
-                 
+                  <a href="MenuServlet?flag=delete&did=${m.id }" class="btn btn-danger" style="margin-left:30px;height:30px;width:30px;padding:4px;"><span class="glyphicon glyphicon-remove"></span></a>
                   </td>
               </tr>
               </c:forEach>
@@ -85,13 +83,34 @@
     				type:"post",
     				data:{"mess":str},
     				success:function(d){
-    					alert("成功删除"+d+"条数据");
-    					location="UserServlet?flag=findAll";
+    					if(d==0)
+    						alert("并未删除任何数据");
+    					else
+    					    alert("成功删除"+d+"条数据");
+    					location="MenuServlet?flag=findAll";
     				}
     			}) 
     			//$(".findbox").attr('action','GoodsServlet?flag=deledeSome&ids='+str); 
     			//$(".findbox").submit(); 
         	});
+        	/* //删除之前，查询有没有下级菜单，有提示用户，没有不提示
+        	$("a[href='']").click(function(){
+        		var id=$(this).attr("id");
+        		$.ajax({
+        			url:"MenuServlet?flag=checkMenu",
+        			type:"post",
+        			data:{"id":id},
+        			success:function(d){
+        				if(d!=0){
+        					if(confirm("是否连同下级菜单一起删除？")){
+        						location.href="MenuServlet?flag=delete&did="+id;
+        					}
+        			}else{
+        				location="MenuServlet?flag=delete&did="+id;
+        			}
+        			}
+        		});
+        	}); */
         })
     </script>
 

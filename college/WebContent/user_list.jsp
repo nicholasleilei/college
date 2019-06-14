@@ -78,7 +78,10 @@
     				type:"post",
     				data:{"mess":str},
     				success:function(d){
-    					alert("成功删除"+d+"条数据");
+    					if(d==0)
+    						alert("并未删除任何数据");
+    					else
+    					    alert("成功删除"+d+"条数据");
     					location="UserServlet?flag=findAll";
     				}
     			}) 

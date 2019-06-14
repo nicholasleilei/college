@@ -53,9 +53,14 @@ public class UserServlet extends HttpServlet {
 	}
 	private void deleteSome(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String mess=request.getParameter("mess");
-		String[] strs = mess.split(",");
-		us.deleteByIds(mess);
-		response.getWriter().print(strs.length);
+	
+		if((mess!=null) && (!mess.equals(""))) {
+		String[] strs= mess.split(",");
+		  us.deleteByIds(mess);
+		  response.getWriter().print(strs.length);
+		}
+		response.getWriter().print(0);
+		
 	}
 	private void login(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub

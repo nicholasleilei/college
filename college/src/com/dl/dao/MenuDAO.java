@@ -26,6 +26,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		String sql="delete from menu where id="+id;
+		System.out.println(sql);
 		DBUtil.execute(sql);
 	}
 
@@ -101,7 +102,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 			   return findBySql(sql);
 			}
 	 public List<Menu> findBySearchPage(HttpServletRequest request,String name) {
-			String url="MenuServlet?flag=findByTitle";
+			String url="MenuServlet?flag=findBySomething";
 			int size=8;
 			int rows=findBySomething(name).size();
 			int cpage=request.getParameter("pager")==null?1:Integer.parseInt(request.getParameter("pager"));
@@ -127,6 +128,22 @@ public class MenuDAO implements BaseDAO<Menu>{
 		// TODO Auto-generated method stub
 		String sql ="select * from menu where mid="+id;
 		return findBySql(sql);
+	}
+
+	public void deleteByIds(String strs) {
+		// TODO Auto-generated method stub
+				String sql="delete from menu where id in("+strs+")";
+				System.out.println(sql);
+				try {
+					Connection conn = DBUtil.getConn();
+					PreparedStatement stmt = conn.prepareStatement(sql);
+					stmt.executeUpdate();
+					conn.close();
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 
 
