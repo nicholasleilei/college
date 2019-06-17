@@ -93,7 +93,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 	}
 	 public List<Menu> findByPage(HttpServletRequest request) {
 			String url="MenuServlet?flag=findAll";
-			int size=8;
+			int size=7;
 			int rows=findAll().size();
 			int cpage=request.getParameter("pager")==null?1:Integer.parseInt(request.getParameter("pager"));
 			String pager=Pager.getPagerStr(url, size, rows, cpage, 1);
@@ -103,7 +103,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 			}
 	 public List<Menu> findBySearchPage(HttpServletRequest request,String name) {
 			String url="MenuServlet?flag=findBySomething";
-			int size=8;
+			int size=7;
 			int rows=findBySomething(name).size();
 			int cpage=request.getParameter("pager")==null?1:Integer.parseInt(request.getParameter("pager"));
 			String pager=Pager.getPagerStr(url, size, rows, cpage, 1);

@@ -71,5 +71,16 @@ public SubMenu() {
 	super();
 	// TODO Auto-generated constructor stub
 }
+public SubMenu(int id, String title, String img, String type, Menu menu, String time, User user, String content) {
+	super();
+	this.id = id;
+	this.title = title;
+	this.img = img;
+	this.type = type;
+	this.menu = menu;
+	this.time = time;
+	this.user = user;
+	this.content = content;
+}
   
 }

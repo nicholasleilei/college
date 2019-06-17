@@ -15,14 +15,11 @@
       <jsp:include page="header.jsp"></jsp:include>  
         <div id="page-wrapper">
             <div id="page-inner">
+            
                 </div>
 				<footer><p>Copyright &copy; 2019.    DLXY-Lei 版权所有</p></footer>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
- 
-
-
 </body>
-
 </html>

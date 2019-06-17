@@ -109,7 +109,7 @@ public class UserDAO implements BaseDAO<User>{
 	public List<User> findByPage(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		String url="UserServlet?flag=findAll";
-		int size=8;
+		int size=7;
 		int rows=findAll().size();
 		int cpage=request.getParameter("pager")==null?1:Integer.parseInt(request.getParameter("pager"));
 		String pager=Pager.getPagerStr(url, size, rows, cpage, 1);
@@ -121,7 +121,7 @@ public class UserDAO implements BaseDAO<User>{
 	public List<User> finByNameInPage(HttpServletRequest request, String name) {
 		// TODO Auto-generated method stub
 		String url="UserServlet?flag=findByName";
-		int size=8;
+		int size=7;
 		int rows=findBySomething(name).size();
 		int cpage=request.getParameter("pager")==null?1:Integer.parseInt(request.getParameter("pager"));
 		String pager=Pager.getPagerStr(url, size, rows, cpage, 1);

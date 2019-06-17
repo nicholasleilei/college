@@ -26,7 +26,7 @@
             <ul class="nav  navbar-right" style="margin-right:30px;">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> admin
+                        <i class="fa fa-user fa-fw"></i> ${loginUser.username}
                     </a>
                 </li>
                 <li><a href="bgindex.jsp"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
@@ -44,7 +44,7 @@
                         <a href="MenuServlet?flag=findAll"><i class="fa fa-sitemap"></i> 菜单管理</a>
                     </li>
 					<li>
-                        <a href="SubServlet?flag=findAll"><i class="fa fa-edit"></i> 子菜单管理</a>
+                        <a href="SubMenuServlet?flag=findAll"><i class="fa fa-edit"></i> 子菜单管理</a>
                     </li>
                     <li>
                         <a href="ImageServlet?flag=findAll"><i class="glyphicon glyphicon-film"></i> 轮播图管理</a>
