@@ -79,7 +79,7 @@
     			});
     			 str=str.substring(0,str.length-1);
     			 $.ajax({
-    				url:"MenuServlet?flag=deleteSome",
+    				url:"SubMenuServlet?flag=deleteSome",
     				type:"post",
     				data:{"mess":str},
     				success:function(d){
@@ -87,7 +87,7 @@
     						alert("并未删除任何数据");
     					else
     					    alert("成功删除"+d+"条数据");
-    					location="MenuServlet?flag=findAll";
+    					location="SubMenuServlet?flag=findAll";
     				}
     			}) 
     			//$(".findbox").attr('action','GoodsServlet?flag=deledeSome&ids='+str); 

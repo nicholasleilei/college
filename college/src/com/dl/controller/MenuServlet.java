@@ -14,7 +14,6 @@ import com.dl.service.MenuService;
 
 import net.sf.json.JSONArray;
 
-//import net.sf.json.JSONArray;
 @WebServlet("/MenuServlet")
 public class MenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

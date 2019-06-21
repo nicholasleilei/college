@@ -64,4 +64,14 @@ public class SubMenuService implements IBaseService<SubMenu>{
 		return mdao.findById(parseInt);
 	}
 
+	public List<SubMenu> findBySearchPage(HttpServletRequest request, String title) {
+		// TODO Auto-generated method stub
+		return smdao.findBySearchPage(request, title);
+	}
+
+	public void deleteByIds(String strs) {
+		// TODO Auto-generated method stub
+		smdao.deleteByIds(strs);
+	}
+
 }

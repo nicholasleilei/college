@@ -54,10 +54,25 @@ public class SubMenuServlet extends HttpServlet {
 		case "yinsert":
 			yinsert(request,response);
 			break;
-
+		case "deleteSome":
+			deleteSome(request,response);
+			break;
 		default:
 			break;
 		}
+	}
+	private void deleteSome(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// TODO Auto-generated method stub
+		String mess=request.getParameter("mess");
+		System.out.println(mess);
+			if((mess!=null) && (!mess.equals(""))) {
+			String[] strs= mess.split(",");
+			  ss.deleteByIds(mess);
+			  response.getWriter().print(strs.length);
+			}else {
+				response.getWriter().print(0);
+			}
+			
 	}
 	private void yinsert(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
@@ -83,15 +98,15 @@ public class SubMenuServlet extends HttpServlet {
 //		}
 	}
 	private void findByTitle(HttpServletRequest request, HttpServletResponse response) {
-//		String title = request.getParameter("title");
-//		List<SubMenu> subs = ss.findBySearchPage(request, title);//.findByName(title);
-//		request.setAttribute("subs", subs);
-//		try {
-//			request.getRequestDispatcher("submenu_show.jsp").forward(request, response);
-//		} catch (ServletException | IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		String title = request.getParameter("title");
+		List<SubMenu> subs = ss.findBySearchPage(request, title);//.findByName(title);
+		request.setAttribute("subs", subs);
+		try {
+			request.getRequestDispatcher("submenu_list.jsp").forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	private void update(HttpServletRequest request, HttpServletResponse response) {

@@ -105,4 +105,29 @@ public class SubMenuDAO implements BaseDAO<SubMenu>{
 		return findBySql(sql);
 	}
 
+	public List<SubMenu> findBySearchPage(HttpServletRequest request, String title) {
+		String url = "SubMenuServlet?flag=findByTitle";
+		int size = 7;
+		int rows = findBySomething(title).size();
+		int cpage = request.getParameter("pager") == null ? 1 : Integer.parseInt(request.getParameter("pager"));
+		String pager = Pager.getPagerStr(url, size, rows, cpage, 1);
+		request.setAttribute("pager", pager);
+		String sql = "select * from submenu where title like '%" + title + "%' limit " + (cpage - 1) * size + "," + size;
+		return findBySql(sql);
+	}
+	public void deleteByIds(String strs) {
+		// TODO Auto-generated method stub
+				String sql="delete from submenu where id in("+strs+")";
+				System.out.println(sql);
+				try {
+					Connection conn = DBUtil.getConn();
+					PreparedStatement stmt = conn.prepareStatement(sql);
+					stmt.executeUpdate();
+					conn.close();
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
 }
