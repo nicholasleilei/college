@@ -23,5 +23,10 @@ public Image() {
 	super();
 	// TODO Auto-generated constructor stub
 }
+public Image(int id, String loc) {
+	super();
+	this.id = id;
+	this.loc = loc;
+}
   
 }
