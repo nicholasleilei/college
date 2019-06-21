@@ -25,6 +25,7 @@ public class ImageServlet extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("12321321312321312333333");
 		String flag = request.getParameter("flag");
 		switch (flag) {
 		case "findAll":
