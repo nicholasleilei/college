@@ -74,8 +74,10 @@ button {
 					}
 				});
 				$("#mid").show();
+				$("#url").show();
 			}else{
 				$("#mid").hide();
+				$("#url").hide();
 			}
 		});
 	});
@@ -115,6 +117,9 @@ button {
 												</div>
 												<select class="form-control" id="mid" name="mid" style="margin:30px 30px;">
 												</select>
+												 <input
+													class="form-control input-lg " placeholder="URL" id="url"
+													name="url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;"/>
 												<button type="submit" class="btn btn-info">新增</button>
 											</div>
 

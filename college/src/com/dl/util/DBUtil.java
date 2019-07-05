@@ -15,11 +15,16 @@ public class DBUtil {
    private static DruidDataSource dds =null;
    
    public static Connection getConn() {
-	   dds = new DruidDataSource();
+	   if(dds==null) {
+		   dds = new DruidDataSource(); 
+	   }
+	  
 	   dds.setDriverClassName(driver);
 	   dds.setUrl(url);
 	   dds.setUsername(username);
 	   dds.setPassword(password);
+	   dds.setMaxPoolPreparedStatementPerConnectionSize(20);
+	   dds.setMaxActive(10);
 	   try {
 		return dds.getConnection();
 	} catch (SQLException e) {

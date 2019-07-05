@@ -70,5 +70,15 @@ private MenuDAO mdao = new MenuDAO();
 		mdao.deleteByIds(strs);
 	}
 
+	public List<Menu> findMenus01() {
+		// TODO Auto-generated method stub
+		return mdao.findMenus01();
+	}
+
+	public List<Menu> findMenus02() {
+		// TODO Auto-generated method stub
+		return mdao.findMenus02();
+	}
+
 
 }

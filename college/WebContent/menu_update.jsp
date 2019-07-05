@@ -54,9 +54,11 @@ button {
 		if($("#isHomePage").is(":checked")){
 			$("#chbox").attr('disabled',true);
 			$("#mid").hide();
+			$("#url").hide();
 		}else{
 			$("#chbox").attr('disabled',false);	
 			$("#mid").show();
+			$("#url").show();
 		}
 		
 		//网页加载时判断 是否有上级菜单被选中 如果被选中 显示下拉列表项 用户修改
@@ -66,6 +68,7 @@ button {
 			if($("#isHomePage")[0].checked){
 				$("#chbox")[0].checked=false;
 				$("#mid").hide();
+				$("#url").hide();
 				$("#chbox").attr('disabled',true);
 			}else{
 				$("#chbox").attr('disabled',false);
@@ -131,6 +134,9 @@ button {
 												      <option value="${ms.id }" <c:if test="${ms.id==menu.menu.id }">selected</c:if>>${ms.title}</option>
 												   </c:forEach>
 												</select>
+												 <input
+													class="form-control input-lg " placeholder="URL" id="url"
+													name="url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;" value="${menu.url }"/>
 												<button type="submit" class="btn btn-info">更新</button>
 											</div>
 

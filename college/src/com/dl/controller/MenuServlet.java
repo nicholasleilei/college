@@ -110,17 +110,18 @@ public class MenuServlet extends HttpServlet {
 		String type =request.getParameter("type");
 		String mid = request.getParameter("mid");
 		String isHomePage =request.getParameter("isHomePage");
+		String url=request.getParameter("url");
 		Menu menu=null;
 		if(type==null) {
 			if(isHomePage==null)
-				type="导航菜单";
+				type="栏目菜单";
 			else
 				type="首页菜单";
 		}else {
 			type="列表菜单";
 			menu=ms.findById(Integer.parseInt(mid));
 		}
-		Menu m = new Menu(Integer.parseInt(id),title,type,menu);
+		Menu m = new Menu(Integer.parseInt(id),title,type,menu,url);
 		ms.update(m);
 		findAll(request, response);
 	}
@@ -144,21 +145,21 @@ public class MenuServlet extends HttpServlet {
 		String mid = request.getParameter("mid");
 		String isHomePage =request.getParameter("isHomePage");//是否在首页显示成栏目框
 		Menu menu=null;
+		String url=request.getParameter("url");
 		if(type==null) {
 			if(isHomePage==null)
-				type="导航菜单";
+				type="栏目菜单";
 			else
 				type="首页菜单";
 		}else {
 			type="列表菜单";
 			menu=ms.findById(Integer.parseInt(mid));
 		}
-		Menu m = new Menu(title,type,menu);
+		Menu m = new Menu(title,type,menu,url);
 		ms.insert(m);
 		findAll(request, response);
 	}
 	private void delete(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println(1222);
 		int  id = Integer.parseInt(request.getParameter("did"));
 		System.out.println("id:"+id);
 		ms.delete(id);

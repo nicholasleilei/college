@@ -18,7 +18,8 @@ public class MenuDAO implements BaseDAO<Menu>{
 	@Override
 	public void insert(Menu t) {
 		// TODO Auto-generated method stub
-		String sql="insert into menu values(null,'"+t.getTitle()+"','"+t.getType()+"',"+(t.getMenu()==null?null:t.getMenu().getId())+")";
+		String sql="insert into menu values(null,'"+t.getTitle()+"','"+t.getType()+"',"+(t.getMenu()==null?null:t.getMenu().getId())+",'"+t.getUrl()+"')";
+		System.out.println(sql);
 		DBUtil.execute(sql);
 	}
 
@@ -33,7 +34,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 	@Override
 	public void update(Menu t) {
 		// TODO Auto-generated method stub
-		String sql="update menu set title='"+t.getTitle()+"',type='"+t.getType()+"',mid="+(t.getMenu()==null?null:t.getMenu().getId())+" where id="+t.getId();
+		String sql="update menu set title='"+t.getTitle()+"',type='"+t.getType()+"',mid="+(t.getMenu()==null?null:t.getMenu().getId())+",url='"+t.getUrl()+"' where id="+t.getId();
 		DBUtil.execute(sql);
 	}
 
@@ -74,6 +75,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 				m.setTitle(rs.getString(2));
 				m.setType(rs.getString(3));
 				m.setMenu(findById(rs.getInt(4)));
+				m.setUrl(rs.getString(5));
 				menus.add(m);
 			}
 			ps.close();
@@ -88,7 +90,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 
 	public List<Menu> findParentMenu() {
 		// TODO Auto-generated method stub
-		String sql="select * from menu where mid is null";
+		String sql="select * from menu where mid is null and type='Ê×Ò³²Ëµ¥'";
 		return findBySql(sql);
 	}
 	 public List<Menu> findByPage(HttpServletRequest request) {
@@ -144,6 +146,18 @@ public class MenuDAO implements BaseDAO<Menu>{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	}
+
+	public List<Menu> findMenus01() {
+		// TODO Auto-generated method stub
+		String sql ="select * from menu where mid is null";
+		return findBySql(sql);
+	}
+
+	public List<Menu> findMenus02() {
+		// TODO Auto-generated method stub
+		String sql ="select * from menu where mid is not null";
+		return findBySql(sql);
 	}
 
 
