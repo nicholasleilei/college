@@ -74,4 +74,21 @@ public class SubMenuService implements IBaseService<SubMenu>{
 		smdao.deleteByIds(strs);
 	}
 
+	public SubMenu findByEqName1(String title) {
+		// TODO Auto-generated method stub
+		int mid =mdao.findMenuByName(title).getId();
+		return smdao.findByEqName1(mid);
+	}
+	public List<SubMenu> findByEqName2(String title,SubMenu ji) {
+		// TODO Auto-generated method stub
+		int mid =mdao.findMenuByName(title).getId();
+		return smdao.findByEqName2(mid,ji);
+	}
+
+	public List<SubMenu> findByMenuTitle(String string) {
+		// TODO Auto-generated method stub
+		Menu  m = mdao.findByEqName(string);
+		return smdao.findByMid(m.getId());
+	}
+
 }

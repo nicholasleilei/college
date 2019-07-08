@@ -108,21 +108,27 @@ public class MenuServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String title = request.getParameter("title");
 		String type =request.getParameter("type");
-		String mid = request.getParameter("mid");
-		String isHomePage =request.getParameter("isHomePage");
-		String url=request.getParameter("url");
-		Menu menu=null;
-		if(type==null) {
-			if(isHomePage==null)
-				type="栏目菜单";
-			else
-				type="首页菜单";
-		}else {
-			type="列表菜单";
-			menu=ms.findById(Integer.parseInt(mid));
-		}
-		Menu m = new Menu(Integer.parseInt(id),title,type,menu,url);
-		ms.update(m);
+		String url="";
+		Menu menu = new Menu();
+		menu.setId(Integer.parseInt(id));
+		menu.setTitle(title);
+		menu.setType(type);
+		if("列表菜单".equals(type)) {
+			String mid = request.getParameter("mid");
+			menu.setMenu(ms.findById(Integer.parseInt(mid)));
+			url=request.getParameter("list_url");
+		} /*
+			 * else if("栏目菜单".equals(type)) { url=request.getParameter("art_url"); }
+			 */
+		menu.setUrl(url);
+		/*
+		 * String mid = request.getParameter("mid"); String isHomePage
+		 * =request.getParameter("isHomePage"); String url=request.getParameter("url");
+		 * Menu menu=null; if(type==null) { if(isHomePage==null) type="栏目菜单"; else
+		 * type="首页菜单"; }else { type="列表菜单"; menu=ms.findById(Integer.parseInt(mid)); }
+		 * Menu m = new Menu(Integer.parseInt(id),title,type,menu,url);
+		 */
+		ms.update(menu);
 		findAll(request, response);
 	}
 	private void yupdate(HttpServletRequest request, HttpServletResponse response) {
@@ -141,22 +147,21 @@ public class MenuServlet extends HttpServlet {
 	}
 	private void insert(HttpServletRequest request, HttpServletResponse response) {
 		String title = request.getParameter("title");
-		String type =request.getParameter("type");//是否有上级菜单=是：导航菜单 否列表菜单
-		String mid = request.getParameter("mid");
-		String isHomePage =request.getParameter("isHomePage");//是否在首页显示成栏目框
-		Menu menu=null;
-		String url=request.getParameter("url");
-		if(type==null) {
-			if(isHomePage==null)
-				type="栏目菜单";
-			else
-				type="首页菜单";
-		}else {
-			type="列表菜单";
-			menu=ms.findById(Integer.parseInt(mid));
-		}
-		Menu m = new Menu(title,type,menu,url);
-		ms.insert(m);
+		String type =request.getParameter("type");
+		String url="";
+		Menu menu = new Menu();
+		menu.setTitle(title);
+		menu.setType(type);
+		if("列表菜单".equals(type)) {
+			String mid = request.getParameter("mid");
+			menu.setMenu(ms.findById(Integer.parseInt(mid)));
+			url=request.getParameter("list_url");
+		} /*
+			 * else if("栏目菜单".equals(type)) { url=request.getParameter("art_url"); }
+			 */
+		menu.setUrl(url);
+
+		ms.insert(menu);
 		findAll(request, response);
 	}
 	private void delete(HttpServletRequest request, HttpServletResponse response) {

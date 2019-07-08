@@ -272,13 +272,18 @@ aside>section>article>.art_top{
 	height:25px;
 }
 .art_main_left_title>a{
-	font-size: 16px;
+	font-size: 12px;
 	color:black;
 }
 .art_main_left_content{
-	font-size: 12px;
+	margin-top:10px;
+	padding-top:5px;
+	font-size:11px;
 	color:grey;
-	height:40px;
+	height:35px;
+}
+.art_main_left_content>span{
+	font-size: 11px;
 }
 .art_main_right{
 	width: 55%;
@@ -307,8 +312,7 @@ aside>section>article>.art_top{
 	height:45px;
 	line-height: 45px;;
 /*	border-bottom: 1px  inset #B22222;*/
-	padding: 2px 10px;
-	background-color: yellow;
+	padding: 2px 7px;
 	margin-top:3px;
 	background: url(../img/line1.png);
 	background-position: -10px 130px;
@@ -316,6 +320,10 @@ aside>section>article>.art_top{
 }
 .art_list>li>a{
 	color: white;
+	height:45px;
+}
+.art_list>li>a:hover{
+	text-decoration: underline;
 }
 .arti{
 	width:66%;

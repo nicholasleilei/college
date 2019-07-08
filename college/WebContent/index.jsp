@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -40,69 +41,7 @@
 					</ul>
 				</li>
 			</c:forEach>
-			<!-- 	<li><a href="">学校概况</a>
-					<ul>
-						<li><a href="">11111</a></li>
-						<li><a href="">22222</a></li>
-						<li><a href="">33333</a></li>
-					</ul>
-				</li>
-				<li><a href="">管理机构</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li>
-				<li><a href="">教学院部</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li>
-				<li><a href="">4</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li>
-				<li><a href="">5</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li>
-				<li><a href="">6</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li>
-				<li><a href="">7</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li>
-				<li><a href="">8</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li>
-				<li><a href="">9</a>
-					<ul>
-						<li>11111</li>
-						<li>22222</li>
-						<li>33333</li>
-					</ul>
-				</li> -->
+		
 			</ul>
 		
 		</header>
@@ -121,35 +60,27 @@
 				<article>
 					<div class="art_top">
 						<span class="art_top_left">吉农新闻</span>
-						<a class="art_top_right">查看更多>></a>
+						<a class="art_top_right" href="">查看更多>></a>
 					</div>
 					<div class="art_main">
 						<div class="art_main_left">
 							<div class="art_main_left_img">
-								<img src="img/b.jpg" />
+								<img src="/i/${jinong1.img }" />
 							</div>
-							<div class="art_main_left_title"><a href="">喀拉拉拉拉</a></div>
-							<div class="art_main_left_content">大苏打似的</div>
+							<div class="art_main_left_title"><a href="" style="font-size: 14px;">${jinong1.title }</a></div>
+						    <div class="art_main_left_content">${jinong1.content}</div> 
 						</div>
 						<ul class="art_main_right">
-							<li><a href="">我校召开庆祝中国共产党成立98周年暨“... (07月01日)</a></li>
-							<li><a href="">我校举办“学习筑梦”行动之优秀校友报告会 (06月30日)</a></li>
-							<li><a href="">我校举办2019年“安全生产月”系列活动... (06月28日)</a></li>
-							<li><a href="">我校举办2019年“安全生产月”系列活动... (06月28日)</a></li>
-							<li><a href="">我校举办2019年“安全生产月”系列活动... (06月28日)</a></li>
-							<li><a href="">我校举办2019年“安全生产月”系列活动... (06月28日)</a></li>
-							<li><a href="">我校举办2019年“安全生产月”系列活动... (06月28日)</a></li>
-							<li><a href="">我校举办2019年“安全生产月”系列活动... (06月28日)</a></li>
+						<c:forEach items="${jinongs}" var="jn" begin="0" end="7">
+						  <li><a href="">${fn:length(jn.title)>20?fn:substring(jn.title,0,20).concat('...'):jn.title }(${fn:substring(jn.time,5,11)})</a></li>
+						</c:forEach>
 						</ul>
 					</div>
 				</article>
 				<ul class="art_list">
-					<li><a href="">2018年度考核民主测评投票...</a></li>
-					<li><a href="">学习筑梦专栏</a></li>
-					<li><a href="">学习筑梦专栏</a></li>
-					<li><a href="">学习筑梦专栏</a></li>
-					<li><a href="">学习筑梦专栏</a></li>
-					<li><a href="">学习筑梦专栏</a></li>
+				<c:forEach items="${hongs }" var="h">
+				   <li><a href="${h.url }" ${fn:length(h.title)>=13?'style="font-size:13px;"':'' }>${h.title }</a></li>
+				</c:forEach>
 				</ul>
 			</section>
 		</aside>
@@ -160,48 +91,19 @@
 					<li id="l2"><a href="">媒体吉农</a></li>
 				</ul>
 				<ul class="art_left_list" id="u1">
-					<li><div class="art_left_list_date">
-						<span>09:57</span>
+				<c:forEach items="${jicengs }" var="jc">
+				<li><div class="art_left_list_date">
+						<span>${fn:substring(jc.time,11,17)}</span>
 						<div class="art_left_list_date_bottom">
-                            07-01							
+                            ${fn:substring(jc.time,5,11)}					
 						</div>
 					</div>
 					  <div class="art_left_list_content">
-					  	 <div class="art_left_list_content_title"><a href="">sdasdas按时大苏打</a></div>
-					  	  <div class="art_left_list_content_message">实打实大苏打实打实的</div>
+					  	 <div class="art_left_list_content_title"><a href="">${fn:length(jc.title)>20?fn:substring(jc.title,0,20).concat("..."):jc.title}</a></div>
+					  	  <div class="art_left_list_content_message">${fn:indexOf(jc.content,"<span") }+++${fn:substring(jc.content,fn:indexOf(jc.content,"<span"),fn:indexOf(jc.content,"</span>"))}</div>
 					  </div>
 					</li>
-					<li><div class="art_left_list_date">
-						<span>09:57</span>
-						<div class="art_left_list_date_bottom">
-                            07-01							
-						</div>
-					</div>
-					  <div class="art_left_list_content">
-					  	 <div class="art_left_list_content_title"><a href="">sdasdas按时大苏打</a></div>
-					  	  <div class="art_left_list_content_message">实打实大苏打实打实的</div>
-					  </div>
-					</li><li><div class="art_left_list_date">
-						<span>09:57</span>
-						<div class="art_left_list_date_bottom">
-                            07-01							
-						</div>
-					</div>
-					  <div class="art_left_list_content">
-					  	 <div class="art_left_list_content_title"><a href="">sdasdas按时大苏打</a></div>
-					  	  <div class="art_left_list_content_message">实打实大苏打实打实的</div>
-					  </div>
-					</li><li><div class="art_left_list_date">
-						<span>09:57</span>
-						<div class="art_left_list_date_bottom">
-                            07-01							
-						</div>
-					</div>
-					  <div class="art_left_list_content">
-					  	 <div class="art_left_list_content_title"><a href="">sdasdas按时大苏打</a></div>
-					  	  <div class="art_left_list_content_message">实打实大苏打实打实的</div>
-					  </div>
-					</li>
+				</c:forEach>
 				</ul>
 		<ul class="art_left_change" id="u2">
 				    <li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>

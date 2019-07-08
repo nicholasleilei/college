@@ -80,5 +80,14 @@ private MenuDAO mdao = new MenuDAO();
 		return mdao.findMenus02();
 	}
 
+	public List<Menu> findByEqName(String string) {
+		// TODO Auto-generated method stub
+		Menu m =mdao.findByEqName(string);
+		
+		return findByMid(m.getId());
+	}
+
+	
+
 
 }

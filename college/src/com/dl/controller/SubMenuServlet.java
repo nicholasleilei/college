@@ -114,11 +114,11 @@ public class SubMenuServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String mid = request.getParameter("mid");
 		String content =request.getParameter("content");
-		String time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		String time=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
 		User user = (User) request.getSession().getAttribute("loginUser");
 		 String image=upload(request);
 		
-		  System.out.println(mid+"  "+id); 
+		  System.out.println(image+"   "+mid+"  "+id); 
 		  SubMenu s = new SubMenu(Integer.parseInt(id),title,image,"ндуб",ss.findByMId(Integer.parseInt(mid)),time,user,content); 
 		  ss.update(s);
 		 
@@ -142,7 +142,7 @@ public class SubMenuServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String mid = request.getParameter("mid");
 		String content =request.getParameter("content");
-		String time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		String time=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
 		User user = (User) request.getSession().getAttribute("loginUser");
 		String upfile=upload(request);
 		SubMenu s = new SubMenu(title,upfile,"ндуб",ss.findByMId(Integer.parseInt(mid)),time,user,content);

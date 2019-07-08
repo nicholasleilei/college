@@ -50,33 +50,26 @@ button {
 	type="text/javascript"></script>
 <script type="text/javascript">
 	$(function() {
-		//网页加载时判断 是否选中是否首页显示  用于修改
-		if($("#isHomePage").is(":checked")){
-			$("#chbox").attr('disabled',true);
+		//网页加载时判断 
+		if($("#nav_menu").is(":checked")){
 			$("#mid").hide();
-			$("#url").hide();
-		}else{
-			$("#chbox").attr('disabled',false);	
+			$("#list_url").hide();
+			//$("#art_url").hide();
+		}else if($("#list_menu").is(":checked")){
 			$("#mid").show();
 			$("#url").show();
+			//$("#art_url").hide();
+		}else if($("#art_menu").is(":checked")){
+			$("#mid").hide();
+			$("#list_url").hide();
+			//$("#art_url").show();
 		}
 		
 		//网页加载时判断 是否有上级菜单被选中 如果被选中 显示下拉列表项 用户修改
 		
 		
-		$("#isHomePage").click(function(){
-			if($("#isHomePage")[0].checked){
-				$("#chbox")[0].checked=false;
-				$("#mid").hide();
-				$("#url").hide();
-				$("#chbox").attr('disabled',true);
-			}else{
-				$("#chbox").attr('disabled',false);
-			}
-		});
-		
-		$("#chbox").click(function() {
-			if ($("#chbox").is(":checked")){
+		$("#list_menu").click(function(){
+			if($(this)[0].checked){
 				$.ajax({
 					url:'MenuServlet?flag=findParentMenu',
 					type:'post',
@@ -89,10 +82,26 @@ button {
 					}
 				});
 				$("#mid").show();
+				$("#list_url").show();
 			}else{
 				$("#mid").hide();
+				$("#list_url").hide();
+				
 			}
+			//$("#art_url").hide();
+			
 		});
+		$("#nav_menu").click(function(){
+			$("#mid").hide();
+			$("#list_url").hide();
+			//$("#art_url").hide();
+		});
+		$("#art_menu").click(function(){
+			$("#mid").hide();
+			$("#list_url").hide();
+			//$("#art_url").show();
+		});
+		
 	});
 </script>
 </head>
@@ -116,28 +125,28 @@ button {
 											method="post">
 											<input type="hidden" name="id" value="${menu.id }">
 											<div class="form-group col-xs-6">
-												<label for="title" class="sr-only"></label> <input
+											<label for="title" class="sr-only"></label> <input
 													class="form-control input-lg " placeholder="标题" id="title"
-													name="title"  value="${menu.title }"/>
+													name="title" value="${menu.title }"/>
 												<div class="checkbox" style="margin:20px 40px;">
-												
-													<label> <input type="checkbox"  name="isHomePage" id="isHomePage" ${menu.type eq '首页菜单'?'checked':'' }/>
-														是否首页显示
-													</label>
-													<br><br>
-														<label> <input type="checkbox" id="chbox" name="type" ${menu.type eq '列表菜单'?'checked':'' }/>
-														是否有上级菜单
-													</label>
-												</div>
-												<select class="form-control" id="mid" name="mid" style="margin:30px 30px;">
-												   <c:forEach items="${menus }" var="ms">
-												      <option value="${ms.id }" <c:if test="${ms.id==menu.menu.id }">selected</c:if>>${ms.title}</option>
-												   </c:forEach>
+													<label style="margin:5px 0px;"><input type="radio" name="type" value="导航菜单"  id="nav_menu" ${menu.type eq '导航菜单'?'checked':'' }/><span style="color:gray;margin-left:10px;">设置为导航菜单</span></label>
+													<label style="margin:5px 0px;"><input type="radio" name="type" value="列表菜单" id="list_menu" ${menu.type eq '列表菜单'?'checked':'' }/><span style="color:gray;margin-left:10px;">设置为列表菜单</span></label>
+													<select class="form-control" id="mid" name="mid" style="margin:30px 30px;">
 												</select>
-												 <input
-													class="form-control input-lg " placeholder="URL" id="url"
-													name="url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;" value="${menu.url }"/>
-												<button type="submit" class="btn btn-info">更新</button>
+												<input
+													class="form-control input-lg " placeholder="URL" id="list_url"
+													name="list_url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;"/>
+													<label style="margin:5px 0px;">
+													<input type="radio" name="type" value="栏目菜单" id="art_menu" ${menu.type eq '栏目菜单'?'checked':'' }/>
+													<span style="color:gray;margin-left:10px;">设置为栏目菜单</span></label>
+													<input
+													class="form-control input-lg " placeholder="URL" id="art_url"
+													name="art_url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;"/>
+													  
+												</div>
+												
+												 
+												<button type="submit" class="btn btn-info">新增</button>
 											</div>
 
 

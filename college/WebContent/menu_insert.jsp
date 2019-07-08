@@ -50,18 +50,8 @@ button {
 	type="text/javascript"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#isHomePage").click(function(){
-			if($("#isHomePage")[0].checked){
-				$("#chbox")[0].checked=false;
-				$("#mid").hide();
-				$("#chbox").attr('disabled',true);
-			}else{
-				$("#chbox").attr('disabled',false);
-			}
-		});
-		
-		$("#chbox").click(function() {
-			if ($("#chbox").is(":checked")){
+		$("#list_menu").click(function(){
+			if($(this)[0].checked){
 				$.ajax({
 					url:'MenuServlet?flag=findParentMenu',
 					type:'post',
@@ -74,12 +64,26 @@ button {
 					}
 				});
 				$("#mid").show();
-				$("#url").show();
+				$("#list_url").show();
 			}else{
 				$("#mid").hide();
-				$("#url").hide();
+				$("#list_url").hide();
+				
 			}
+			//$("#art_url").hide();
+			
 		});
+		$("#nav_menu").click(function(){
+			$("#mid").hide();
+			$("#list_url").hide();
+			//$("#art_url").hide();
+		});
+		$("#art_menu").click(function(){
+			$("#mid").hide();
+			$("#list_url").hide();
+			//$("#art_url").show();
+		});
+		
 	});
 </script>
 </head>
@@ -106,20 +110,23 @@ button {
 													class="form-control input-lg " placeholder="标题" id="title"
 													name="title" />
 												<div class="checkbox" style="margin:20px 40px;">
-												
-													<label> <input type="checkbox"  name="isHomePage" id="isHomePage"/>
-														是否首页显示
-													</label>
-													<br><br>
-														<label> <input type="checkbox" id="chbox" name="type"/>
-														是否有上级菜单
-													</label>
-												</div>
-												<select class="form-control" id="mid" name="mid" style="margin:30px 30px;">
+													<label style="margin:5px 0px;"><input type="radio" name="type" value="导航菜单" checked id="nav_menu"/><span style="color:gray;margin-left:10px;">设置为导航菜单</span></label>
+													<label style="margin:5px 0px;"><input type="radio" name="type" value="列表菜单" id="list_menu"/><span style="color:gray;margin-left:10px;">设置为列表菜单</span></label>
+													<select class="form-control" id="mid" name="mid" style="margin:30px 30px;">
 												</select>
-												 <input
-													class="form-control input-lg " placeholder="URL" id="url"
-													name="url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;"/>
+												<input
+													class="form-control input-lg " placeholder="URL" id="list_url"
+													name="list_url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;"/>
+													<label style="margin:5px 0px;">
+													<input type="radio" name="type" value="栏目菜单" id="art_menu"/>
+													<span style="color:gray;margin-left:10px;">设置为栏目菜单</span></label>
+													<!-- <input
+													class="form-control input-lg " placeholder="URL" id="art_url"
+													name="art_url" style="margin-bottom:20px;display:none;height:30px;margin-left:30px;"/> -->
+													  
+												</div>
+												
+												 
 												<button type="submit" class="btn btn-info">新增</button>
 											</div>
 

@@ -19,7 +19,6 @@ public class MenuDAO implements BaseDAO<Menu>{
 	public void insert(Menu t) {
 		// TODO Auto-generated method stub
 		String sql="insert into menu values(null,'"+t.getTitle()+"','"+t.getType()+"',"+(t.getMenu()==null?null:t.getMenu().getId())+",'"+t.getUrl()+"')";
-		System.out.println(sql);
 		DBUtil.execute(sql);
 	}
 
@@ -27,7 +26,6 @@ public class MenuDAO implements BaseDAO<Menu>{
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		String sql="delete from menu where id="+id;
-		System.out.println(sql);
 		DBUtil.execute(sql);
 	}
 
@@ -90,7 +88,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 
 	public List<Menu> findParentMenu() {
 		// TODO Auto-generated method stub
-		String sql="select * from menu where mid is null and type='首页菜单'";
+		String sql="select * from menu where mid is null and type in('导航菜单','栏目菜单')";
 		return findBySql(sql);
 	}
 	 public List<Menu> findByPage(HttpServletRequest request) {
@@ -160,6 +158,21 @@ public class MenuDAO implements BaseDAO<Menu>{
 		return findBySql(sql);
 	}
 
+	public Menu findMenuByName(String name) {
+		// TODO Auto-generated method stub
+		String sql = "select * from menu where title='"+name+"'";
+		List<Menu> menus = findBySql(sql);
+		return menus.size()>0?menus.get(0):null;
+	}
+
+	public Menu findByEqName(String string) {
+		// TODO Auto-generated method stub
+		String sql="select * from menu where title='"+string+"'";
+		List<Menu> menus = findBySql(sql);
+		return menus.size()>0?menus.get(0):null;
+	}
+
+	
 
 
 

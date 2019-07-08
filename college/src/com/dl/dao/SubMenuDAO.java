@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.dl.pojo.Menu;
 import com.dl.pojo.SubMenu;
 import com.dl.util.DBUtil;
 import com.dl.util.Pager;
@@ -27,11 +28,10 @@ public class SubMenuDAO implements BaseDAO<SubMenu>{
 	@Override
 	public void update(SubMenu t) {
 		// TODO Auto-generated method stub
-		var image=t.getImg()==null?",img='"+t.getImg()+"'":"";
+		String image=(t.getImg()==null||"".equals(t.getImg()))?"":",img='"+t.getImg()+"'";
 		String sql = "update submenu set title='" + t.getTitle() + "'"+image+",type='" + t.getType() + "',mid=" + t.getMenu().getId()
 				+ ",time='" + t.getTime() + "',uid=" + t.getUser().getId() + ",content='" + t.getContent()
 				+ "' where id=" + t.getId();
-		System.out.println(sql);
 		DBUtil.execute(sql);
 	}
 
@@ -129,5 +129,25 @@ public class SubMenuDAO implements BaseDAO<SubMenu>{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	}
+
+	public SubMenu findByEqName1(int mid) {
+		// TODO Auto-generated method stub
+		//is not null²»ºÃÊ¹
+		String sql="select * from submenu where  mid="+mid+ " and length(img)>2  order by time desc";
+		List<SubMenu> submenus = findBySql(sql);
+		return submenus.size()>0?submenus.get(0):null;
+	}
+
+	public List<SubMenu> findByEqName2(int mid,SubMenu ji) {
+		// TODO Auto-generated method stub
+		String sql="select * from submenu where  mid="+mid+ " and id !="+ji.getId()+" order by time desc";
+		return findBySql(sql);
+	}
+
+	public List<SubMenu> findByMid(int id) {
+		// TODO Auto-generated method stub
+		String sql="select * from submenu where mid="+id;
+		return  findBySql(sql);
 	}
 }
