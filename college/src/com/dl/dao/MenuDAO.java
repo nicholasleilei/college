@@ -76,8 +76,8 @@ public class MenuDAO implements BaseDAO<Menu>{
 				m.setUrl(rs.getString(5));
 				menus.add(m);
 			}
-			ps.close();
 			rs.close();
+			ps.close();
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +94,7 @@ public class MenuDAO implements BaseDAO<Menu>{
 	 public List<Menu> findByPage(HttpServletRequest request) {
 			String url="MenuServlet?flag=findAll";
 			int size=7;
-			int rows=findAll().size();
+			int rows=10;
 			int cpage=request.getParameter("pager")==null?1:Integer.parseInt(request.getParameter("pager"));
 			String pager=Pager.getPagerStr(url, size, rows, cpage, 1);
 			request.setAttribute("pager", pager);

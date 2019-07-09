@@ -31,7 +31,7 @@
 		
 			<ul class="nav">
 			<c:forEach items="${m1s }" var="m" begin="0" end="8">
-			     <li><a href="">${m.title}</a>
+			     <li><a href="IndexServlet?flag=findSecond&mid=${m.id }">${m.title}</a>
 					<ul>
 					<c:forEach items="${m2s }" var="n">
 					<c:if test="${m.id==n.menu.id }">
@@ -100,21 +100,15 @@
 					</div>
 					  <div class="art_left_list_content">
 					  	 <div class="art_left_list_content_title"><a href="">${fn:length(jc.title)>20?fn:substring(jc.title,0,20).concat("..."):jc.title}</a></div>
-					  	  <div class="art_left_list_content_message">${fn:indexOf(jc.content,"<span") }+++${fn:substring(jc.content,fn:indexOf(jc.content,"<span"),fn:indexOf(jc.content,"</span>"))}</div>
+					  	  <div class="art_left_list_content_message">${jc.content}</div>
 					  </div>
 					</li>
 				</c:forEach>
 				</ul>
 		<ul class="art_left_change" id="u2">
-				    <li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li class="art_left_list_lis"><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
+		<c:forEach items="${meitis }" var="mt">
+				    <li class="art_left_list_lis"><a href="">${fn:length(mt.title)>20?fn:substring(mt.title,0,20).concat("..."):mt.title }<span>${fn:substring(mt.time,0,11) }</span></a></li>
+		</c:forEach>
 				</ul>
 			</div>
 			<div class="art_right">
@@ -124,15 +118,9 @@
 					<li><a href="" >查看更多>></a></li>
 				</ul>
 				<ul class="art_left_list">
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
-					<li><a href="">吉林农业科技学院招聘军队退役人员公告<span>2019-06-28</span></a></li>
+				<c:forEach items="${tongzhis }" var="tz">
+					<li><a href="">${fn:length(tz.title)>28?fn:substring(tz.title,0,28).concat("..."):tz.title }<span>${fn:substring(tz.time,0,10) }</span></a></li>
+				</c:forEach>
 				</ul>
 			</div>
 		</div>

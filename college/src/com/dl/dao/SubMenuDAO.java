@@ -76,8 +76,9 @@ public class SubMenuDAO implements BaseDAO<SubMenu>{
 				s.setContent(rs.getString(8));
 				subs.add(s);
 			}
-			ps.close();
 			rs.close();
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,7 +98,7 @@ public class SubMenuDAO implements BaseDAO<SubMenu>{
 		// TODO Auto-generated method stub
 		String url = "SubMenuServlet?flag=findAll";
 		int size = 7;
-		int rows = findAll().size();
+		int rows = 10;//19.size();
 		int cpage = request.getParameter("pager") == null ? 1 : Integer.parseInt(request.getParameter("pager"));
 		String pager = Pager.getPagerStr(url, size, rows, cpage, 1);
 		request.setAttribute("pager", pager);

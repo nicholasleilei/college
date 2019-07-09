@@ -1,5 +1,6 @@
 package com.dl.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import com.dl.dao.MenuDAO;
 import com.dl.dao.SubMenuDAO;
 import com.dl.pojo.Menu;
 import com.dl.pojo.SubMenu;
+import com.dl.util.HTMLUtil;
 
 public class SubMenuService implements IBaseService<SubMenu>{
 
@@ -89,6 +91,23 @@ public class SubMenuService implements IBaseService<SubMenu>{
 		// TODO Auto-generated method stub
 		Menu  m = mdao.findByEqName(string);
 		return smdao.findByMid(m.getId());
+	}
+	
+	public List<SubMenu> changeContent(List<SubMenu> sm,int end){
+		List<SubMenu> sbs = new ArrayList<>();
+		for(SubMenu sub:sm) {
+			 SubMenu ss = new SubMenu();
+			 ss.setId(sub.getId());
+			 ss.setImg(sub.getImg());
+			 ss.setMenu(sub.getMenu());
+			 ss.setTime(sub.getTime());
+			 ss.setTitle(sub.getTitle());
+			 ss.setType(sub.getType());
+			 ss.setUser(sub.getUser());
+			 ss.setContent(HTMLUtil.getText(sub.getContent(), end));
+			 sbs.add(ss);
+		}
+		return sbs;
 	}
 
 }

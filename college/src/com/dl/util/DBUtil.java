@@ -23,8 +23,8 @@ public class DBUtil {
 	   dds.setUrl(url);
 	   dds.setUsername(username);
 	   dds.setPassword(password);
-	   dds.setMaxPoolPreparedStatementPerConnectionSize(20);
-	   dds.setMaxActive(10);
+	   //dds.setMaxPoolPreparedStatementPerConnectionSize(20);
+	   //dds.setMaxActive(10);
 	   try {
 		return dds.getConnection();
 	} catch (SQLException e) {
@@ -39,8 +39,8 @@ public class DBUtil {
 				Connection conn = getConn();
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				stmt.executeUpdate();
-				conn.close();
 				stmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
